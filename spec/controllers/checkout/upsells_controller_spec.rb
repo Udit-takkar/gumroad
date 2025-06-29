@@ -108,7 +108,7 @@ describe Checkout::UpsellsController do
       it "returns the a cart item for the product" do
         get :cart_item, params: { product_id: product.external_id }, as: :json
 
-        checkout_presenter = CheckoutPresenter.new(logged_in_user: nil, ip: nil)
+        checkout_presenter = CheckoutPresenter.new(logged_in_user: nil, ip: nil, social_proof_widgets: [])
         expect(response.parsed_body.deep_symbolize_keys).to eq(
           checkout_presenter.checkout_product(
             product,

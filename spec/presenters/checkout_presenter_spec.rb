@@ -11,7 +11,7 @@ describe CheckoutPresenter do
           @user = create(:user, currency_type: "jpy", credit_card: create(:credit_card))
         end
       end
-      @instance = described_class.new(logged_in_user: @user, ip: "104.193.168.19")
+      @instance = described_class.new(logged_in_user: @user, ip: "104.193.168.19", social_proof_widgets: [])
 
       TipOptionsService.set_tip_options([5, 15, 25])
       TipOptionsService.set_default_tip_option(15)

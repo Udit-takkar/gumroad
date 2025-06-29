@@ -66,6 +66,6 @@ class CartPresenter
         call_start_time: cart_product.call_start_time,
         pay_in_installments: cart_product.pay_in_installments,
       )
-      CheckoutPresenter.new(logged_in_user:, ip:).checkout_product(cart_product.product, cart_item, params)
+      CheckoutPresenter.new(logged_in_user:, ip:, social_proof_widgets: []).checkout_product(cart_product.product, cart_item, params)
     end
 end

@@ -6,7 +6,8 @@ class CheckoutController < ApplicationController
   def index
     @hide_layouts = true
     @on_checkout_page = true
-    @checkout_presenter = CheckoutPresenter.new(logged_in_user:, ip: request.remote_ip)
+    @social_proof_widgets = SocialProofWidget.all
+    @checkout_presenter = CheckoutPresenter.new(logged_in_user:, ip: request.remote_ip, social_proof_widgets: @social_proof_widgets)
   end
 
   private

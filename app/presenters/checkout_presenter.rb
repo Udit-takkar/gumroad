@@ -9,11 +9,12 @@ class CheckoutPresenter
   include PreorderHelper
   include CardParamsHelper
 
-  attr_reader :logged_in_user, :ip
+  attr_reader :logged_in_user, :ip, :social_proof_widgets
 
-  def initialize(logged_in_user:, ip:)
+  def initialize(logged_in_user:, ip:, social_proof_widgets:)
     @logged_in_user = logged_in_user
     @ip = ip
+    @social_proof_widgets = social_proof_widgets || []
   end
 
   def checkout_props(params:, browser_guid:)
@@ -42,6 +43,7 @@ class CheckoutPresenter
       max_allowed_cart_products: Cart::MAX_ALLOWED_CART_PRODUCTS,
       tip_options: TipOptionsService.get_tip_options,
       default_tip_option: TipOptionsService.get_default_tip_option,
+      social_proof_widgets: @social_proof_widgets.map(&:attributes),
     }
   end
 
@@ -216,7 +218,8 @@ class CheckoutPresenter
         is_overdue_for_charge: subscription.overdue_for_charge?,
         is_gift: subscription.gift?,
         is_installment_plan: subscription.is_installment_plan,
-      }
+      },
+      social_proof_widgets: @social_proof_widgets.map(&:attributes),
     }
   end
 

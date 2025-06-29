@@ -26,7 +26,7 @@ class Checkout::UpsellsController < Sellers::BaseController
 
     product = current_seller.products.find_by_external_id!(params[:product_id])
 
-    checkout_presenter = CheckoutPresenter.new(logged_in_user: nil, ip: nil)
+    checkout_presenter = CheckoutPresenter.new(logged_in_user: nil, ip: nil, social_proof_widgets: [])
     render json: checkout_presenter.checkout_product(
       product,
       product.cart_item({
